@@ -2,8 +2,8 @@
 Nama/NIM : Reinhard Denis Najogie/13509097
 Nama file : T-08-13509097-mstackd.c
 Topik : ADT
-Tanggal : 19 Oktober 2010
-Deksripsi : ADT Stack
+Tanggal : 21 Oktober 2010
+Deksripsi : ADT Stack dengan alokasi memori dinamis
 */
 
 #include <stdio.h>
