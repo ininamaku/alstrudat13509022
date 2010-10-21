@@ -1,1 +1,6 @@
+ADT ini berhasil di compile dan jalan pada Ubuntu dengan me-run perintah berikut pada terminal:
+export MALLOC_CHECK_=0
+lalu dicompile seperti biasa dengan:
 gcc -o main T-08-13509097-stacks.c T-08-13509097-mstacks.c -Wall
+dan untuk yang dinamik:
+gcc -o main T-08-13509097-stackd.c T-08-13509097-mstackd.c -Wall
