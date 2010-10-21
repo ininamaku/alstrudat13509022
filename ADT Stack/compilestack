@@ -1,0 +1,1 @@
+gcc -o main T-08-13509097-stacks.c T-08-13509097-mstacks.c -Wall
