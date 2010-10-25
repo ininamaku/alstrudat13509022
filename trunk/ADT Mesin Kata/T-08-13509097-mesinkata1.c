@@ -1,10 +1,10 @@
 #ifndef MESINKATA_C 
 #define MESINKATA_C
-#include "mesinkata2.h"
+#include "T-08-13509097-mesinkata1.h"
 #include "boolean.h"
 #include <stdio.h>
 
-
+boolean EndKata;
 Kata CKata;
 extern char CC;
 
@@ -20,8 +20,8 @@ void Ignore_Blank(void)
 
 void  STARTKATA(void)
 /*  I.S.  :  CC  sembarang  */ 
-/*  F.S.  :  CKata.length  =  0,  dan  CC  =  Mark;  */ 
-/*	atau  CKata.length != 0  ,  CKata  adalah  kata  yang  sudah  diakuisisi,
+/*  F.S.  :  EndKata  =  true,  dan  CC  =  Mark;  */ 
+/*	atau  EndKata  =  false,  CKata  adalah  kata  yang  sudah  diakuisisi,
 	CC  karakter  pertama  sesudah  karakter  terakhir  kata  */ 
 {
 	/* Kamus Lokal */
@@ -30,7 +30,7 @@ void  STARTKATA(void)
 	Ignore_Blank();
 	
 	if (EOP() || CC == BLANK ) {
-		CKata.length = 0;
+		EndKata = true;
 	} else {
 		SalinKata();
 	}
@@ -39,19 +39,24 @@ void  STARTKATA(void)
 void ADVKATA (void)
 /*  I.S.  :  EndKata  =  false;  CC  adalah  karakter  sesudah  karakter  terakhir 
 	dari  kata  yg  sudah  diakuisisi  */ 
-/*  F.S.  :  CKata  adalah  kata  terakhir  yang  sudah  diakuisisi; 
-	CC  karakter  pertama  sesudah  karakter  terakhir  kata, mungkin MARK  */ 
+/*  F.S.  :  Jika  CC  =  MARK,  maka  EndKata  =  true atau  EndKata  =  false,  
+	CKata  adalah  kata  terakhir  yang  sudah  diakuisisi; 
+	CC  karakter  pertama  sesudah  karakter  terakhir  kata  */ 
 {
 	//algoritma	
 	Ignore_Blank();
-	SalinKata();
-	
+	if (!EOP()) {
+		SalinKata();
+	} else {
+		EndKata = true;
+	}
 }
 
 void  SalinKata (void)
 /*  Mengakuisisi  kata,  menyimpan  dalam  CKata  */ 
 /*  I.S.  :  CC  adalah  karakter  pertama  dari  kata  */ 
-/*  F.S.  :  CKata  berisi  kata  yang  sudah  diakuisisi, CC  =  BLANK  atau  CC  =  MARK;  CC  adalah karakter  sesudah  karakter  terakhir  yang  diakuisisi  */ 
+/*  F.S.  :  CKata  berisi  kata  yang  sudah  diakuisisi,  jika  karakternya  melebihi 
+	NMax,  sisa  "kata"  dibuang;  CC  =  BLANK  atau  CC  =  MARK;  CC  adalah karakter  sesudah  karakter  terakhir  yang  diakuisisi  */ 
 {
 	//kamus lokal
 	int i =0;
@@ -63,6 +68,11 @@ void  SalinKata (void)
 	}
 	CKata.length = i;		
 	
+	if (CC == EOP() && i<NMax) {
+		EndKata = true;
+	} else {
+		EndKata = false;
+	}	
 }
 
 	

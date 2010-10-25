@@ -1,9 +1,8 @@
 #ifndef MESINKATA_C 
 #define MESINKATA_C
-#include "mesinkata2.h"
+#include "T-08-13509097-mesinkata2.h"
 #include "boolean.h"
 #include <stdio.h>
-
 
 Kata CKata;
 extern char CC;
@@ -18,16 +17,24 @@ void Ignore_Blank(void)
 	}
 }
 
-void INITAKSES(void)
-/*	Mengabaikan satu atau beberapa BLANK pada awal pita */
-/*	I.S.	: CC sembarang
-	F.S.	: CC = MARK; atau CC = karakter pertama dari kata yang akan diakuisisi */
+void  STARTKATA(void)
+/*  I.S.  :  CC  sembarang  */ 
+/*  F.S.  :  CKata.length  =  0,  dan  CC  =  Mark;  */ 
+/*	atau  CKata.length != 0  ,  CKata  adalah  kata  yang  sudah  diakuisisi,
+	CC  karakter  pertama  sesudah  karakter  terakhir  kata  */ 
 {
+	/* Kamus Lokal */
+	// Algoritma
 	START();
 	Ignore_Blank();
+	
+	if (EOP() || CC == BLANK ) {
+		CKata.length = 0;
+	} else {
+		SalinKata();
+	}
 }
-
-
+	
 void ADVKATA (void)
 /*  I.S.  :  EndKata  =  false;  CC  adalah  karakter  sesudah  karakter  terakhir 
 	dari  kata  yg  sudah  diakuisisi  */ 
@@ -35,8 +42,8 @@ void ADVKATA (void)
 	CC  karakter  pertama  sesudah  karakter  terakhir  kata, mungkin MARK  */ 
 {
 	//algoritma	
-	SalinKata();
 	Ignore_Blank();
+	SalinKata();
 	
 }
 
